@@ -36,17 +36,19 @@ int main (int __unused argc, char* argv[]) {
   fprintf(fptr,"%s: stage1: haxx stage 1 running!: uid = %d\n", asctime(timeinfo), getuid());
   posix_spawnattr_t attr;
   posix_spawnattr_init(&attr);
+#ifdef HAXX_SETUID
   posix_spawnattr_set_persona_np(&attr, /*persona_id=*/99, POSIX_SPAWN_PERSONA_FLAGS_OVERRIDE);
   posix_spawnattr_set_persona_uid_np(&attr, 0);
-  fprintf(fptr,"%s: stage1: Trying to spawn haxx stage 2 as root...\n", asctime(timeinfo));
+#endif
+  fprintf(fptr,"%s: stage1: Trying to spawn haxx stage 2...\n", asctime(timeinfo));
   int pid = 0;
   int ret = posix_spawnp(&pid, STAGE_TWO, NULL, &attr, argv_stage2, envp);
   if (ret) {
     fprintf(fptr, "%s: stage1: Unable to spawn stage2 %s: %s", asctime(timeinfo), STAGE_TWO, strerror(errno));
   }
   fprintf(fptr, "%s: stage1: executing %s, bye\n", asctime(timeinfo), REAL);
-  fclose(fptr);
   execve(REAL, argv_real, envp);
   fprintf(fptr, "%s: stage1: unable to execute %s: %s\n", asctime(timeinfo), REAL, strerror(errno));
+  fclose(fptr);
   exit(2);
 }
