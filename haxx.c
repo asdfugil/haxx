@@ -27,7 +27,12 @@ void get_time_string(char* str) {
 }
 int main (int __unused argc, char* argv[]) {
   char timestr[50] = "";
-  FILE* fptr = fopen(LOG_FILE,"a");
+  FILE* fptr;
+  if (strcmp(argv[1], "LAUNCHD_HAXX") == 0) {
+    fptr = stderr;
+  } else {
+    fptr = fopen(LOG_FILE,"a");
+  }
   if (fptr == NULL) {
     fprintf(stderr, "stage2: Unable to open %s: %s\n", LOG_FILE,  strerror(errno));
     exit(1);
@@ -38,7 +43,7 @@ int main (int __unused argc, char* argv[]) {
   if (getuid() != 0) {
     get_time_string(&timestr);
     fprintf(fptr, "%s: stage2: uid != 0\n", timestr);
-    fclose(fptr);
+    if (strcmp(argv[1], "LAUNCHD_HAXX") != 0) fclose(fptr);
     exit(1);
   }
 #endif
@@ -74,6 +79,6 @@ int main (int __unused argc, char* argv[]) {
     abort();
   }
 #endif
-  fclose(fptr);
+  if (strcmp(argv[1], "LAUNCHD_HAXX") != 0) fclose(fptr);
   exit(0);
 }
