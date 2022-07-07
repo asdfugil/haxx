@@ -23,7 +23,7 @@ Note: requires macOS + existing jailbreak
 
 After doing the above steps, `fileproviderctl` will be broken, to fix it do the following steps
 1. Grab a copy of `/usr/bin/fileproviderctl` on your device to your mac
-2. Patch the binary with GNU sed: `gsed -i 's|/usr/local/bin/fileproviderctl_internal|/usr/local/bin/fileproviderctl_XXXXXXXX|g' fileproivderctl`
+2. Patch the binary with GNU sed: `gsed -i 's|/usr/local/bin/fileproviderctl_internal|/usr/local/bin/fileproviderctl_XXXXXXXX|g' fileproviderctl`
 3. Resign it: `codesign -s "Worth Doing Badly iPhone OS Application Signing" --preserve-metadata=entitlements --force fileproviderctl`
 4. Put the fixed binary back onto your device.
 
