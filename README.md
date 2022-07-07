@@ -10,7 +10,7 @@ Note: requires macOS + existing jailbreak
 
 ### Get up and running
 
-1. On your mac import dev_certificate.p12 into the keychain, and the password is `password`.
+1. Ensure you have [ldid](https://github.com/ProcursusTeam/ldid) from Procursus Team.
 2. Modify haxx.c to include your own code (if you need it).
 3. Run `make` to build
 4. On the device, Copy `/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd` to `/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd.back`
