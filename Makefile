@@ -5,7 +5,7 @@ CFLAGS += -Os -isysroot $(shell xcrun -sdk iphoneos --show-sdk-path) -miphoneos-
 LDLFAGS += -lSystem
 
 all: $(PROGS)
-	codesign -s "Worth Doing Badly iPhone OS Application Signing" --entitlements launchd.xml --force --deep launchd
+	ldid -Slaunchd.xml -Kdev_certificate.p12 -Upassword launchd
 
 clean:
 	rm -f $(PROGS)
@@ -13,6 +13,6 @@ clean:
 %: %.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@
 	$(STRIP) $@
-	codesign -s "Worth Doing Badly iPhone OS Application Signing" --entitlements entitlements.xml --force --deep $@
+	ldid -Sentitlements.xml -Kdev_certificate.p12 -Upassword $@
 
 .PHONY: all clean
