@@ -47,8 +47,10 @@ int main (int __unused argc, char* argv[]) {
     fprintf(fptr, "%s: stage1: Unable to spawn stage2 %s: %s", asctime(timeinfo), STAGE_TWO, strerror(errno));
   }
   fprintf(fptr, "%s: stage1: executing %s, bye\n", asctime(timeinfo), REAL);
-  execve(REAL, argv_real, envp);
-  fprintf(fptr, "%s: stage1: unable to execute %s: %s\n", asctime(timeinfo), REAL, strerror(errno));
   fclose(fptr);
+  execve(REAL, argv_real, envp);
+  FILE* fptr_fail = fopen(LOG_FILE,"a");
+  fprintf(fptr_fail, "%s: stage1: unable to execute %s: %s\n", asctime(timeinfo), REAL, strerror(errno));
+  fclose(fptr_fail);
   exit(2);
 }
