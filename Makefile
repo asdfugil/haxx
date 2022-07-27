@@ -1,7 +1,10 @@
-PROGS = fileproviderctl_internal haxx login launchd
-CC ?= clang
+PROGS := fileproviderctl_internal haxx login launchd
+CC    ?= clang
 STRIP ?= strip
-CFLAGS += -Os -isysroot $(shell xcrun -sdk iphoneos --show-sdk-path) -miphoneos-version-min=14.0 -arch arm64
+
+TARGET_SYSROOT ?= $(shell xcrun -sdk iphoneos --show-sdk-path)
+
+CFLAGS  += -Os -isysroot $(TARGET_SYSROOT) -miphoneos-version-min=14.0 -arch arm64
 LDLFAGS += -lSystem
 
 all: $(PROGS)

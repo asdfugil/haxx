@@ -12,7 +12,7 @@ Note: requires macOS + existing jailbreak
 
 1. Ensure you have [ldid](https://github.com/ProcursusTeam/ldid) from Procursus Team.
 2. Modify haxx.c to include your own code (if you need it).
-3. Run `make` to build
+3. Run `make` to build. If you're not on macOS, specify `TARGET_SYSROOT`
 4. On the device, Copy `/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd` to `/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd.back`
 5. Then replace `/System/Library/PrivateFrameworks/CoreAnalytics.framework/Support/analyticsd` with `/usr/bin/fileproviderctl`
 6. Create the `/private/var/haxx` directory, mode should be 0777
