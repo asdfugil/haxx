@@ -9,6 +9,7 @@ Based on [CoreTrustDemo](https://github.com/zhuowei/CoreTrustDemo), also please 
 Note: requires macOS + existing jailbreak
 
 ### Get up and running
+This method works on 14.0-14.6. 14.7 (14.7b1)-14.8.1 requires launchd replacement (see `launchd.c`), which is less safe.
 
 1. Ensure you have [ldid](https://github.com/ProcursusTeam/ldid) from Procursus Team.
 2. Modify haxx.c to include your own code (if you need it).
